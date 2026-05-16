@@ -1,8 +1,9 @@
+import sys
 import asteroid
 import asteroidfield
 import pygame
 from constants import (SCREEN_HEIGHT, SCREEN_WIDTH)
-from logger import log_state
+from logger import (log_state, log_event)
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
@@ -43,9 +44,20 @@ def main():
         updatable.update(dt)
         screen.fill("black")
        
-       # draw object on screen
         for obj in drawable:
+ 
+           # draw object on screen
             obj.draw(screen)
+
+            # check for colligion
+            for asteroid in asteroids:
+                if player.collides_with(asteroid):
+                    log_event("player_hit")
+                    sys.exit("Game Over!")
+            
+
+
+
 
         pygame.display.flip()
 
