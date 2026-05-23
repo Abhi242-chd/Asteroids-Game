@@ -1,6 +1,6 @@
 import pygame
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED, LINE_WIDTH
+from constants import PLAYER_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_TURN_SPEED, PLAYER_SPEED, LINE_WIDTH
 from shot import Shot
 
 class Player(CircleShape):
@@ -45,7 +45,12 @@ class Player(CircleShape):
         if keys[pygame.K_d]:
            self.rotation += self.rotate(dt)
 
-    def shot(self):         
-        shot = Shot(self.position)
-        pygame.Vector2(0, 1).rotate()
+        if keys[pygame.K_SPACE]:
+            self.shoot()
+
+
+    def shoot(self):         
+        shot = Shot(self.position.x, self.position.y) # locate the tip of thr tringle
+        shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
+
 
