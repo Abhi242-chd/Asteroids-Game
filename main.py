@@ -54,6 +54,15 @@ def main():
 
             # check for colligion
             for asteroid in asteroids:
+                for shot in shots:
+                    
+                    # destory the shoted asteroid
+                    if shot.collides_with(asteroid):
+                        log_event("asteroid_shot")
+                        shot.kill()
+                        asteroid.kill()
+
+
                 if player.collides_with(asteroid):
                     log_event("player_hit")
                     sys.exit("Game Over!")
