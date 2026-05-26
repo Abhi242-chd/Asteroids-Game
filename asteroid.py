@@ -12,8 +12,8 @@ class Asteroid(CircleShape):
     def draw(self, screen):
         pygame.draw.circle(screen, "white", self.position, self.radius, LINE_WIDTH)       
 
-    def update(self, dt):
-       return self.velocity * dt
+    def update(self, dt: float):        
+        self.position += self.velocity * dt
 
     def split(self):
         self.kill()
@@ -21,8 +21,10 @@ class Asteroid(CircleShape):
             return
         
         velocity = random.uniform(20, 50)
-        new_astroit = self.velocity.rotate(velocity), self.radius - ASTEROID_MIN_RADIUS       
-        new_astroit2 = self.velocity.rotate(- velocity), self.radius - ASTEROID_MIN_RADIUS
+        new_astroit = self(self.velocity.rotate(velocity), self.radius - ASTEROID_MIN_RADIUS)      
+        new_astroit2 = self(self.velocity.rotate(- velocity), self.radius - ASTEROID_MIN_RADIUS)
+        new_astroit.velocity = new_astroit.velocity * 1.2
+        new_astroit2.velocity = new_astroit2.velocity * 1.2
         return new_astroit, new_astroit2
 
           
