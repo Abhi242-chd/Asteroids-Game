@@ -33,9 +33,7 @@ def main():
     AsteroidField()
 
     print("Starting Asteroids")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
-  
+    print("...")  
   # game loop
     while True:
         log_state()
@@ -61,13 +59,15 @@ def main():
                         log_event("asteroid_shot")
                         shot.kill()
                         asteroid.split()
+                    # remove the off screen objects
+                    shot.out_of_field(SCREEN_HEIGHT + 3, SCREEN_WIDTH + 3)
+                asteroid.out_of_field(SCREEN_HEIGHT + 3, SCREEN_WIDTH + 3)
 
 
                 if player.collides_with(asteroid):
                     log_event("player_hit")
                     sys.exit("Game Over!")
-            
-
+        
 
 
 

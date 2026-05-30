@@ -1,6 +1,7 @@
 from enum import pickle_by_enum_name
 import pygame
 
+
 # Base class for game objects
 class CircleShape(pygame.sprite.Sprite):
     def __init__(self, x, y, radius):
@@ -33,6 +34,10 @@ class CircleShape(pygame.sprite.Sprite):
         # must override
         pass
 
-
-
+    def out_of_field(self, screen_hight, screen_weight):
+        if self.position.x <= -1 * 8 or self.position.x >= screen_weight * 2:
+            self.kill()
+        if self.position.y <= -1 * 8 or self.position.y >= screen_hight * 2:
+            self.kill()
+         
 
