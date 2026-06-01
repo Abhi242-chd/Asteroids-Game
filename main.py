@@ -8,6 +8,7 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
+import copy
 
 
 def main():
@@ -31,6 +32,8 @@ def main():
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     AsteroidField()
+
+    pre_fame_position = copy.deepcopy(player.position)
 
     print("Starting Asteroids")
     print("...")  
@@ -60,13 +63,17 @@ def main():
                         shot.kill()
                         asteroid.split()
                     # remove the off screen objects
-                    shot.out_of_field(SCREEN_HEIGHT + 3, SCREEN_WIDTH + 3)
-                asteroid.out_of_field(SCREEN_HEIGHT + 3, SCREEN_WIDTH + 3)
-
+                    shot.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH, True)
+                asteroid.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH)
+                player.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH)
 
                 if player.collides_with(asteroid):
                     log_event("player_hit")
                     sys.exit("Game Over!")
+
+                if player.position != pre_fame_position:
+                    pre_fame_position = copy.deepcopy(player.position)
+                    print(pre_fame_position)
         
 
 

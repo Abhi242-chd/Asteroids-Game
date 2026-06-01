@@ -34,10 +34,22 @@ class CircleShape(pygame.sprite.Sprite):
         # must override
         pass
 
-    def out_of_field(self, screen_hight, screen_weight):
-        if self.position.x <= -1 * 8 or self.position.x >= screen_weight * 2:
-            self.kill()
-        if self.position.y <= -1 * 8 or self.position.y >= screen_hight * 2:
-            self.kill()
-         
+    def out_of_field(self, screen_hight, screen_weight, should_remove=False):
+        left_or_top_coner = 0
+        right_coner = screen_weight        
+        bottem_coner = screen_hight
+        
+        if should_remove:
+            if (self.position.x < left_or_top_coner or self.position.y < left_or_top_coner or self.position.x > right_coner or self.position.y > bottem_coner):
+                self.kill()
+        else:
+            if self.position.x < left_or_top_coner:
+                self.position.x += right_coner
+            
+            if self.position.x > right_coner:
+                self.position.x -=  right_coner
+            if self.position.y < left_or_top_coner:
+                self.position.y +=  bottem_coner
+            if self.position.y > bottem_coner:
+                self.position.y -= bottem_coner
 
