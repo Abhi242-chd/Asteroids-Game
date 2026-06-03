@@ -33,8 +33,7 @@ def main():
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     AsteroidField()
 
-    pre_fame_position = copy.deepcopy(player.position)
-
+    
     print("Starting Asteroids")
     print("...")  
   # game loop
@@ -70,11 +69,6 @@ def main():
                 if player.collides_with(asteroid):
                     log_event("player_hit")
                     sys.exit("Game Over!")
-
-                if player.position != pre_fame_position:
-                    pre_fame_position = copy.deepcopy(player.position)
-                    print(pre_fame_position)
-        
 
 
 
