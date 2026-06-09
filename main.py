@@ -42,6 +42,12 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+            
+            #activate the ablities
+            if event.type == pygame.KEYDOWN:
+                # super shot
+                if event.key == pygame.K_1 or event.key == pygame.K_KP1:
+                    player.super_shoot = not player.super_shoot
         
         dt = clock_object.tick(60) / 1000
         updatable.update(dt)

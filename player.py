@@ -59,16 +59,13 @@ class Player(CircleShape):
                 else:
                     self.shot_cooldown += PLAYER_SHOOT_COOLDOWN_SECONDS
                             
-
+        # shot cooldown reset
         if self.shot_cooldown > 0:        
             self.shot_cooldown -= dt
         if self.super_shoot_charge < SUPER_CHARGE_TIME and self.super_shoot == False:
             self.super_shoot_charge += dt
         
-        #activate the super shoot
-        if keys[pygame.K_1] and self.super_shoot == False and self.super_shoot_charge >= SUPER_CHARGE_TIME:
-            self.super_shoot = not self.super_shoot
-
+        
         
                     
 
