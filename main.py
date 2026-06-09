@@ -48,7 +48,11 @@ def main():
                 # super shot
                 if event.key == pygame.K_1 or event.key == pygame.K_KP1:
                     player.super_shoot = not player.super_shoot
-        
+                #scatter
+                if event.key == pygame.K_2 or event.key == pygame.K_KP2:
+                    shot.is_scatter = not shot.is_scatter
+
+
         dt = clock_object.tick(60) / 1000
         updatable.update(dt)
         screen.fill("black")
@@ -60,6 +64,7 @@ def main():
 
             # check for colligion
             for asteroid in asteroids:
+                asteroid.kill() #debugging code rm
                 for shot in shots:
                     
                     # destory the shoted asteroid
@@ -68,7 +73,7 @@ def main():
                         shot.kill()
                         asteroid.split()
                     # remove the off screen objects
-                    shot.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH, True)
+                    shot.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH, not shot.is_scatter)
                 asteroid.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH)
                 player.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH)
 
