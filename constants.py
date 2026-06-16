@@ -14,7 +14,11 @@ SHOT_RADIUS = 5
 PLAYER_SHOOT_SPEED = 500
 PLAYER_SHOOT_COOLDOWN_SECONDS = 0.3
 SUPER_CHARGE_TIME =  1.5 #sec
-#time stop
+
+# scatter shot
+SCATTER_SHOT_TIME = 9
+
+# time stop
 TIME_STOP_DURATION = 5 #sec
 
 
