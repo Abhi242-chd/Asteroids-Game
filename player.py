@@ -9,8 +9,14 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.shot_cooldown = 0
+        #ablities
+        # super shot
         self.super_shoot = False
         self.super_shoot_charge = SUPER_CHARGE_TIME
+        
+        # scatter_shot
+        self.scatter_shot = False
+
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * self.radius / 1.5
@@ -74,4 +80,6 @@ class Player(CircleShape):
         shot = Shot(tip.x, tip.y) # locate the tip of thr tringle
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
 
-
+    def out_of_field(self, screen_hight, screen_weight, should_remove=False):
+        should_remove = False
+        return super().out_of_field(screen_hight, screen_weight, should_remove)

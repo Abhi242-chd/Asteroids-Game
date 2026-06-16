@@ -8,8 +8,6 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
-import copy
-
 
 def main():
     pygame.init()
@@ -38,7 +36,6 @@ def main():
     print("...")  
   # game loop
     while True:
-        log_state()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
@@ -50,38 +47,39 @@ def main():
                     player.super_shoot = not player.super_shoot
                 #scatter
                 if event.key == pygame.K_2 or event.key == pygame.K_KP2:
-                    shot.is_scatter = not shot.is_scatter
-
+                    player.scatter_shot = not player.scatter_shot
 
         dt = clock_object.tick(60) / 1000
         updatable.update(dt)
         screen.fill("black")
        
+        
+
+            # check for colligion
+        for asteroid in asteroids:
+            if player.collides_with(asteroid):
+                #log_event("player_hit")
+                sys.exit("Game Over!")
+
+            for shot in shots:
+                
+                # destory the shoted asteroid
+                if shot.collides_with(asteroid):
+                 #   log_event("asteroid_shot")
+                    shot.kill()
+                    asteroid.split()
+
         for obj in drawable:
  
            # draw object on screen
             obj.draw(screen)
 
-            # check for colligion
-            for asteroid in asteroids:
-                asteroid.kill() #debugging code rm
-                for shot in shots:
+           # remove the off screen objects
+            obj.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH, player.scatter_shot)
+
+
                     
-                    # destory the shoted asteroid
-                    if shot.collides_with(asteroid):
-                        log_event("asteroid_shot")
-                        shot.kill()
-                        asteroid.split()
-                    # remove the off screen objects
-                    shot.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH, not shot.is_scatter)
-                asteroid.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH)
-                player.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH)
-
-                if player.collides_with(asteroid):
-                    log_event("player_hit")
-                    sys.exit("Game Over!")
-
-
+                        
 
         pygame.display.flip()
 

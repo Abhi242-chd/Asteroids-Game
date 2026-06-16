@@ -26,4 +26,6 @@ class Asteroid(CircleShape):
         new_astroit.velocity = self.velocity.rotate(angle) * 1.2
         new_astroit2.velocity = self.velocity.rotate(-angle) * 1.2
         
-          
+    def out_of_field(self, screen_hight, screen_weight, should_remove=False):
+        should_remove = False
+        return super().out_of_field(screen_hight, screen_weight, should_remove)          
