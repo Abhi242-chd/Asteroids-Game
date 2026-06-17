@@ -74,10 +74,11 @@ class Player(CircleShape):
             self.super_shoot_charge += dt
         
         # scatter shot
-        if self.scatter_shot_time > 0:        
+        if self.scatter_shot_time > 0 and self.scatter_shot:        
             self.scatter_shot_time -= dt
-        elif self.scatter_shot_time <= 0:
-            self.scatter_shot = not self.scatter_shot
+
+        if self.scatter_shot_time <= 0:
+            self.scatter_shot = False
         if self.scatter_shot_time < SCATTER_SHOT_TIME and self.scatter_shot == False:
             self.scatter_shot_time += dt
 

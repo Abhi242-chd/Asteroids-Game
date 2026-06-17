@@ -75,14 +75,9 @@ def main():
             obj.draw(screen)
 
            # remove the off screen objects
-            if player.scatter_shot:
-                obj.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH, player.scatter_shot)
-            else:
-                obj.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH, player.scatter_shot)
-
-            
-
-                    
+            obj.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH, player.scatter_shot)
+                       
+                            
                         
 
         pygame.display.flip()
