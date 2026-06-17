@@ -9,7 +9,7 @@ class Shot(CircleShape):
     def draw(self, screen):
         pygame.draw.circle(screen, "white", self.position, self.radius, LINE_WIDTH)
 
-    def update(self, dt):
+    def update(self, dt, is_time_stop=False):
         self.position += self.velocity * dt
     
     def out_of_field(self, screen_hight, screen_weight, should_remove):

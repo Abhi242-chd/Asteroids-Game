@@ -1,6 +1,6 @@
 import pygame
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_TURN_SPEED, PLAYER_SPEED, LINE_WIDTH, PLAYER_SHOOT_COOLDOWN_SECONDS, SUPER_CHARGE_TIME, SCATTER_SHOT_TIME
+from constants import PLAYER_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_TURN_SPEED, PLAYER_SPEED, LINE_WIDTH, PLAYER_SHOOT_COOLDOWN_SECONDS, SUPER_CHARGE_TIME, SCATTER_SHOT_TIME, TIME_STOP_DURATION
 from shot import Shot
 
 
@@ -17,6 +17,10 @@ class Player(CircleShape):
         # scatter_shot
         self.scatter_shot = False
         self.scatter_shot_time = SCATTER_SHOT_TIME
+
+        # time stop
+        self.is_time_stop = False
+        self.time_stop_duration = TIME_STOP_DURATION
 
 
     def triangle(self):
@@ -40,7 +44,7 @@ class Player(CircleShape):
         self.position += rotated_with_speed_vector
 
 
-    def update(self, dt):
+    def update(self, dt, is_time_stop=False):
         keys = pygame.key.get_pressed()
         
         if keys[pygame.K_w]:
@@ -77,10 +81,19 @@ class Player(CircleShape):
         if self.scatter_shot_time > 0 and self.scatter_shot:        
             self.scatter_shot_time -= dt
 
-        if self.scatter_shot_time <= 0:
+        elif self.scatter_shot_time <= 0:
             self.scatter_shot = False
         if self.scatter_shot_time < SCATTER_SHOT_TIME and self.scatter_shot == False:
             self.scatter_shot_time += dt
+
+            # time stop
+        if self.is_time_stop and self.time_stop_duration > 0:
+            self.time_stop_duration -= dt
+        elif self.time_stop_duration <= 0:
+            self.is_time_stop = False
+        if self.is_time_stop == False and self.time_stop_duration < TIME_STOP_DURATION:
+            self.time_stop_duration += dt
+
 
         
                     

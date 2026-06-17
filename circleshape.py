@@ -30,7 +30,7 @@ class CircleShape(pygame.sprite.Sprite):
         # must override
         pass
 
-    def update(self, dt):
+    def update(self, dt, is_time_stop):
         # must override
         pass
 

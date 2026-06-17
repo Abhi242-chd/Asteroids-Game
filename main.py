@@ -48,9 +48,13 @@ def main():
                 #scatter
                 if event.key == pygame.K_2 or event.key == pygame.K_KP2:
                     player.scatter_shot = not player.scatter_shot
+                # time stop
+                if event.key == pygame.K_5 or event.key == pygame.K_KP5:
+                    player.is_time_stop = not player.is_time_stop
+ 
 
         dt = clock_object.tick(60) / 1000
-        updatable.update(dt)
+        updatable.update(dt, player.is_time_stop)
         screen.fill("black")
        
         
