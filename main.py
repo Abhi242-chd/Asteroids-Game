@@ -75,7 +75,7 @@ def main():
                 # destory the shoted asteroid
                 if shot.collides_with(asteroid):
                  #   log_event("asteroid_shot")
-                    shot.kill()
+                    shot.kill_pierce()
                     asteroid.split()
 
         for obj in drawable:

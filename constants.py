@@ -24,6 +24,9 @@ TIME_STOP_DURATION = 5 #sec
 # pass though
 PASS_THOUGH_DURATION = 8 #sec
 
+# muscle shot
+MUSCLE_SHOTS = 10 # number of shots
+
 # asteroids
 ASTEROID_MIN_RADIUS = 20
 ASTEROID_KINDS = 3

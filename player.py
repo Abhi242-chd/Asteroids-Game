@@ -1,6 +1,6 @@
 import pygame
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_TURN_SPEED, PLAYER_SPEED, LINE_WIDTH, PLAYER_SHOOT_COOLDOWN_SECONDS, SUPER_CHARGE_TIME, SCATTER_SHOT_TIME, TIME_STOP_DURATION, PASS_THOUGH_DURATION
+from constants import PLAYER_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_TURN_SPEED, PLAYER_SPEED, LINE_WIDTH, PLAYER_SHOOT_COOLDOWN_SECONDS, SUPER_CHARGE_TIME, SCATTER_SHOT_TIME, TIME_STOP_DURATION, PASS_THOUGH_DURATION, MUSCLE_SHOTS
 from shot import Shot
 
 
@@ -18,13 +18,17 @@ class Player(CircleShape):
         self.scatter_shot = False
         self.scatter_shot_time = SCATTER_SHOT_TIME
 
+        # pass though
+        self.is_pass_though = False
+        self.pass_though_duration = PASS_THOUGH_DURATION
+
+        # mucsle shot
+        self.__muscle_shots = MUSCLE_SHOTS 
+
         # time stop
         self.is_time_stop = False
         self.time_stop_duration = TIME_STOP_DURATION
 
-        # pass though
-        self.is_pass_though = False
-        self.pass_though_duration = PASS_THOUGH_DURATION
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -73,7 +77,15 @@ class Player(CircleShape):
                         self.super_shoot = not self.super_shoot
                 else:
                     self.shot_cooldown += PLAYER_SHOOT_COOLDOWN_SECONDS
-                            
+        if keys[pygame.K_LCTRL]:
+            if self.shot_cooldown <= 0:
+                if self.__muscle_shots > 0:
+                    self.shoot(is_muscle_shot=True)
+                    self.__muscle_shots -= 1
+                    self.shot_cooldown += PLAYER_SHOOT_COOLDOWN_SECONDS
+
+
+
         # shot cooldown reset
         if self.shot_cooldown > 0:        
             self.shot_cooldown -= dt
@@ -109,9 +121,9 @@ class Player(CircleShape):
         
                     
 
-    def shoot(self):
+    def shoot(self, is_muscle_shot=False):
         tip = self.triangle()[0] 
-        shot = Shot(tip.x, tip.y) # locate the tip of thr tringle
+        shot = Shot(tip.x, tip.y, is_muscle_shot) # locate the tip of thr tringle
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
 
     def out_of_field(self, screen_hight, screen_weight, should_remove=False):
