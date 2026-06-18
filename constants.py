@@ -21,6 +21,8 @@ SCATTER_SHOT_TIME = 9
 # time stop
 TIME_STOP_DURATION = 5 #sec
 
+# pass though
+PASS_THOUGH_DURATION = 8 #sec
 
 # asteroids
 ASTEROID_MIN_RADIUS = 20

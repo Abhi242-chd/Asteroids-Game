@@ -1,6 +1,6 @@
 import pygame
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_TURN_SPEED, PLAYER_SPEED, LINE_WIDTH, PLAYER_SHOOT_COOLDOWN_SECONDS, SUPER_CHARGE_TIME, SCATTER_SHOT_TIME, TIME_STOP_DURATION
+from constants import PLAYER_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_TURN_SPEED, PLAYER_SPEED, LINE_WIDTH, PLAYER_SHOOT_COOLDOWN_SECONDS, SUPER_CHARGE_TIME, SCATTER_SHOT_TIME, TIME_STOP_DURATION, PASS_THOUGH_DURATION
 from shot import Shot
 
 
@@ -14,7 +14,7 @@ class Player(CircleShape):
         self.super_shoot = False
         self.super_shoot_charge = SUPER_CHARGE_TIME
                 
-        # scatter_shot
+        # scatter shot
         self.scatter_shot = False
         self.scatter_shot_time = SCATTER_SHOT_TIME
 
@@ -22,6 +22,9 @@ class Player(CircleShape):
         self.is_time_stop = False
         self.time_stop_duration = TIME_STOP_DURATION
 
+        # pass though
+        self.is_pass_though = False
+        self.pass_though_duration = PASS_THOUGH_DURATION
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -93,6 +96,14 @@ class Player(CircleShape):
             self.is_time_stop = False
         if self.is_time_stop == False and self.time_stop_duration < TIME_STOP_DURATION:
             self.time_stop_duration += dt
+
+           # pass though
+        if self.is_pass_though and self.pass_though_duration> 0:
+            self.pass_though_duration -= dt
+        elif self.pass_though_duration <= 0:
+            self.is_pass_though = False
+        if self.pass_though_duration < PASS_THOUGH_DURATION and self.is_pass_though == False:
+            self.pass_though_duration += dt
 
 
         
