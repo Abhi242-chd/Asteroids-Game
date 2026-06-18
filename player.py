@@ -1,6 +1,6 @@
 import pygame
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_TURN_SPEED, PLAYER_SPEED, LINE_WIDTH, PLAYER_SHOOT_COOLDOWN_SECONDS, SUPER_CHARGE_TIME, SCATTER_SHOT_TIME, TIME_STOP_DURATION, PASS_THOUGH_DURATION, MUSCLE_SHOTS
+from constants import PLAYER_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_TURN_SPEED, PLAYER_SPEED, LINE_WIDTH, PLAYER_SHOOT_COOLDOWN_SECONDS, SUPER_CHARGE_TIME, WARP_SHOT_TIME, TIME_STOP_DURATION, PASS_THOUGH_DURATION, MUSCLE_SHOTS
 from shot import Shot
 
 
@@ -14,9 +14,9 @@ class Player(CircleShape):
         self.super_shoot = False
         self.super_shoot_charge = SUPER_CHARGE_TIME
                 
-        # scatter shot
-        self.scatter_shot = False
-        self.scatter_shot_time = SCATTER_SHOT_TIME
+        # warp shot
+        self.warp_shot = False
+        self.warp_shot_time = WARP_SHOT_TIME
 
         # pass though
         self.is_pass_though = False
@@ -92,14 +92,14 @@ class Player(CircleShape):
         if self.super_shoot_charge < SUPER_CHARGE_TIME and self.super_shoot == False:
             self.super_shoot_charge += dt
         
-        # scatter shot
-        if self.scatter_shot_time > 0 and self.scatter_shot:        
-            self.scatter_shot_time -= dt
+        # warp shot
+        if self.warp_shot_time > 0 and self.warp_shot:        
+            self.warp_shot_time -= dt
 
-        elif self.scatter_shot_time <= 0:
-            self.scatter_shot = False
-        if self.scatter_shot_time < SCATTER_SHOT_TIME and self.scatter_shot == False:
-            self.scatter_shot_time += dt
+        elif self.warp_shot_time <= 0:
+            self.warp_shot = False
+        if self.warp_shot_time < WARP_SHOT_TIME and self.warp_shot == False:
+            self.warp_shot_time += dt
 
             # time stop
         if self.is_time_stop and self.time_stop_duration > 0:
@@ -126,6 +126,6 @@ class Player(CircleShape):
         shot = Shot(tip.x, tip.y, is_muscle_shot) # locate the tip of thr tringle
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
 
-    def out_of_field(self, screen_hight, screen_weight, should_remove=False):
+    def out_of_field(self, screen_hight, screen_width, should_remove=False):
         should_remove = False
-        return super().out_of_field(screen_hight, screen_weight, should_remove)
+        return super().out_of_field(screen_hight, screen_width, should_remove)

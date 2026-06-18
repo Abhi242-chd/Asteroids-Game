@@ -20,6 +20,6 @@ class Shot(CircleShape):
         else:
             self.kill()
 
-    def out_of_field(self, screen_hight, screen_weight, should_remove):
+    def out_of_field(self, screen_hight, screen_width, should_remove):
         should_remove = not should_remove
-        return super().out_of_field(screen_hight, screen_weight, should_remove)
+        return super().out_of_field(screen_hight, screen_width, should_remove)

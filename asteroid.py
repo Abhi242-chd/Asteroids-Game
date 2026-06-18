@@ -22,11 +22,11 @@ class Asteroid(CircleShape):
             return
         log_event("asteroid_split") 
         angle = random.uniform(20, 50)
-        new_astroit = Asteroid(self.position.x ,self.position.y , self.radius - ASTEROID_MIN_RADIUS)      
-        new_astroit2 = Asteroid(self.position.x ,self.position.y, self.radius - ASTEROID_MIN_RADIUS)
-        new_astroit.velocity = self.velocity.rotate(angle) * 1.2
-        new_astroit2.velocity = self.velocity.rotate(-angle) * 1.2
+        new_asteroid = Asteroid(self.position.x ,self.position.y , self.radius - ASTEROID_MIN_RADIUS)      
+        new_asteroid2 = Asteroid(self.position.x ,self.position.y, self.radius - ASTEROID_MIN_RADIUS)
+        new_asteroid.velocity = self.velocity.rotate(angle) * 1.2
+        new_asteroid2.velocity = self.velocity.rotate(-angle) * 1.2
         
-    def out_of_field(self, screen_hight, screen_weight, should_remove=False):
+    def out_of_field(self, screen_hight, screen_width, should_remove=False):
         should_remove = False
-        return super().out_of_field(screen_hight, screen_weight, should_remove)          
+        return super().out_of_field(screen_hight, screen_width, should_remove)          

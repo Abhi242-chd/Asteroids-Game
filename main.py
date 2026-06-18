@@ -45,9 +45,9 @@ def main():
                 # super shot
                 if event.key == pygame.K_1 or event.key == pygame.K_KP1:
                     player.super_shoot = not player.super_shoot
-                #scatter
+                #warp
                 if event.key == pygame.K_2 or event.key == pygame.K_KP2:
-                    player.scatter_shot = not player.scatter_shot
+                    player.warp_shot = not player.warp_shot
   
                 # pass though
                 if event.key == pygame.K_3 or event.key == pygame.K_KP3:
@@ -84,7 +84,7 @@ def main():
             obj.draw(screen)
 
            # remove the off screen objects
-            obj.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH, player.scatter_shot)
+            obj.out_of_field(SCREEN_HEIGHT, SCREEN_WIDTH, player.warp_shot)
                        
          
                         
