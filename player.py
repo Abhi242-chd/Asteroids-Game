@@ -117,8 +117,10 @@ class Player(CircleShape):
         if self.pass_though_duration < PASS_THOUGH_DURATION and self.is_pass_though == False:
             self.pass_though_duration += dt
 
-
-        
+         # muscle shot
+        if self.__muscle_shots < 10:
+            self.__muscle_shots += dt
+                
                     
 
     def shoot(self, is_muscle_shot=False):

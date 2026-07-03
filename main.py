@@ -9,6 +9,7 @@ from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
 
+
 def main():
     pygame.init()
 
@@ -31,9 +32,8 @@ def main():
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     AsteroidField()
 
-    
     print("Starting Asteroids")
-    print("...")  
+    print("...")
   # game loop
     while True:
         for event in pygame.event.get():
@@ -68,7 +68,9 @@ def main():
         for asteroid in asteroids:
             if player.collides_with(asteroid) and not player.is_pass_though:
                 #log_event("player_hit")
-                sys.exit("Game Over!")
+                print("Game Over!")
+                return
+            
 
             for shot in shots:
                 
@@ -92,5 +94,38 @@ def main():
         pygame.display.flip()
 
 
+
+def game_start():
+    user_input = input("to start the game press 1 to quit press 2 (1 / 2):")
+    print(user_input)
+    if user_input == "2":
+        sys.exit("Quit") 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
-    main()
+    while True:
+        game_start()
+        main()
+
+
+
+
+
