@@ -69,6 +69,8 @@ def main():
             if player.collides_with(asteroid) and not player.is_pass_though:
                 #log_event("player_hit")
                 print("Game Over!")
+                screen.fill("black")
+                pygame.display.flip()
                 return
             
 
