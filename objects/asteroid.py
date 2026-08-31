@@ -1,5 +1,5 @@
 import pygame
-from circleshape import CircleShape
+from objects.circleshape import CircleShape
 from constants import LINE_WIDTH, ASTEROID_MIN_RADIUS, ASTEROID_SPAWN_RATE_SECONDS
 import random
 from logger import log_event

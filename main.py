@@ -1,13 +1,13 @@
 import sys
-import asteroid
+import objects.asteroid
 import asteroidfield
 import pygame
 from constants import (SCREEN_HEIGHT, SCREEN_WIDTH)
 from logger import (log_state, log_event)
-from player import Player
-from asteroid import Asteroid
+from objects.player import Player
+from objects.asteroid import Asteroid
 from asteroidfield import AsteroidField
-from shot import Shot
+from objects.shot import Shot
 
 
 def main():
@@ -68,6 +68,8 @@ def main():
         for asteroid in asteroids:
             if player.collides_with(asteroid) and not player.is_pass_though:
                 #log_event("player_hit")
+                screen.fill("black")
+                pygame.display.flip()
                 print("Game Over!")
                 return
             
@@ -97,7 +99,6 @@ def main():
 
 def game_start():
     user_input = input("to start the game press 1 to quit press 2 (1 / 2):")
-    print(user_input)
     if user_input == "2":
         sys.exit("Quit") 
 

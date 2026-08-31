@@ -1,4 +1,4 @@
-from circleshape import CircleShape
+from objects.circleshape import CircleShape
 from constants import LINE_WIDTH, SHOT_RADIUS 
 import pygame
 

@@ -1,7 +1,7 @@
 import pygame
-from circleshape import CircleShape
+from objects.circleshape import CircleShape
 from constants import PLAYER_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_TURN_SPEED, PLAYER_SPEED, LINE_WIDTH, PLAYER_SHOOT_COOLDOWN_SECONDS, SUPER_CHARGE_TIME, WARP_SHOT_TIME, TIME_STOP_DURATION, PASS_THOUGH_DURATION, MUSCLE_SHOTS
-from shot import Shot
+from objects.shot import Shot
 
 
 class Player(CircleShape):
